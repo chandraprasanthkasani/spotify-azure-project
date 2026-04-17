@@ -1,0 +1,9 @@
+{
+	"name": "chandudataafact",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "0208da08-7164-4d44-a2bc-c9a7f01e2f5e",
+		"tenantId": "bbc43316-b38c-4c31-bf01-ff93a306a73c"
+	}
+}
