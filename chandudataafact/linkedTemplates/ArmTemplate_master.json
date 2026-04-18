@@ -1,0 +1,84 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "chandudataafact"
+		},
+		"lnk_gen2_spotify_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'lnk_gen2_spotify'"
+		},
+		"lnk_sql_spotify_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'lnk_sql_spotify'"
+		},
+		"lnk_gen2_spotify_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsacct1.dfs.core.windows.net/"
+		},
+		"lnk_sql_spotify_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "db-server21.database.windows.net"
+		},
+		"lnk_sql_spotify_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "db_database"
+		},
+		"lnk_sql_spotify_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "root1234"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "chandudataafact_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"lnk_gen2_spotify_accountKey": {
+						"value": "[parameters('lnk_gen2_spotify_accountKey')]"
+					},
+					"lnk_sql_spotify_password": {
+						"value": "[parameters('lnk_sql_spotify_password')]"
+					},
+					"lnk_gen2_spotify_properties_typeProperties_url": {
+						"value": "[parameters('lnk_gen2_spotify_properties_typeProperties_url')]"
+					},
+					"lnk_sql_spotify_properties_typeProperties_server": {
+						"value": "[parameters('lnk_sql_spotify_properties_typeProperties_server')]"
+					},
+					"lnk_sql_spotify_properties_typeProperties_database": {
+						"value": "[parameters('lnk_sql_spotify_properties_typeProperties_database')]"
+					},
+					"lnk_sql_spotify_properties_typeProperties_userName": {
+						"value": "[parameters('lnk_sql_spotify_properties_typeProperties_userName')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
